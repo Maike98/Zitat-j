@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batman - Filmzitat-Rätsel</title>
+    <title>Bastis Geburtstagsrätsel</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,11 +24,15 @@
             color: #444;
             margin: 20px 0;
         }
-        .hidden {
-            display: none;
-            font-size: 1.2em;
-            margin: 20px 0;
-            color: #333;
+        input {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            width: calc(100% - 40px);
+            max-width: 300px;
         }
         button {
             margin: 10px;
@@ -37,6 +41,14 @@
             cursor: pointer;
             border: none;
             border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        button.answer {
+            background-color: #FFA500;
+            color: white;
+        }
+        button.answer:hover {
+            background-color: #e69500;
         }
         button.tip {
             background-color: #007BFF;
@@ -45,21 +57,37 @@
         button.tip:hover {
             background-color: #0056b3;
         }
-        button.solution {
-            background-color: #28a745;
-            color: white;
+        #message {
+            margin-top: 20px;
+            font-size: 1em;
         }
-        button.solution:hover {
-            background-color: #1e7e34;
+        .correct {
+            color: green;
+        }
+        .wrong {
+            color: red;
+        }
+        .tip {
+            display: none;
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #333;
         }
     </style>
     <script>
-        function showTip() {
-            document.getElementById("tip").style.display = "block";
-        }
+        function checkAnswer() {
+            const answer = document.getElementById("answer").value.trim().toLowerCase();
+            const message = document.getElementById("message");
+            const correctAnswers = ["Fluch der Karibik"];
 
-        function showSolution() {
-            document.getElementById("solution").style.display = "block";
+            if (correctAnswers.includes(answer)) {
+                message.innerHTML = `<span class="correct">Richtig!</span><br>Drehe den QR-Code um und lege ihn auf Feld 3.`;
+            } else {
+                message.innerHTML = `<span class="wrong">Leider falsch, versuch es noch einmal.</span>`;
+            }
+        }
+        function showTip(id) {
+            document.getElementById(id).style.display = "block";
         }
     </script>
 </head>
@@ -69,10 +97,14 @@
 
     <p class="quote">"Ich hab ein Glas voll Dreck und rat mal, was da drin ist."</p>
 
-    <button class="tip" onclick="showTip()">Tipp anzeigen</button>
-    <p id="tip" class="hidden">Ein Piratenabenteuer mit einem exzentrischen Kapitän, der mehr Glück als Verstand hat.</p>
+        <input type="text" id="answer" placeholder="Filmtitel eingeben">
+        <button class="answer" onclick="checkAnswer()">Antwort prüfen</button>
+    <p id="message"></p>
+    
+    <div>
+        <button onclick="showTip()">Tipp</button>
+        <p id="tip" class="tip">Ein Piratenabenteuer mit einem exzentrischen Kapitän, der mehr Glück als Verstand hat.</p>
+    </div>
 
-    <button class="solution" onclick="showSolution()">Hier geht´s weiter</button>
-    <p id="solution" class="hidden">Drehe den QR-Code um und lege ihn auf Feld 3.</p>
 </body>
 </html>
