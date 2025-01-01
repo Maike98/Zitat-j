@@ -50,13 +50,6 @@
         button.answer:hover {
             background-color: #e69500;
         }
-        button.tip {
-            background-color: #007BFF;
-            color: white;
-        }
-        button.tip:hover {
-            background-color: #0056b3;
-        }
         #message {
             margin-top: 20px;
             font-size: 1em;
@@ -67,27 +60,18 @@
         .wrong {
             color: red;
         }
-        .tip {
-            display: none;
-            margin-top: 10px;
-            font-size: 1.2em;
-            color: #333;
-        }
     </style>
     <script>
         function checkAnswer() {
             const answer = document.getElementById("answer").value.trim().toLowerCase();
             const message = document.getElementById("message");
-            const correctAnswers = ["Fluch der Karibik"];
+            const correctAnswers = ["fluch der karibik", "pirates of the caribbean"];
 
             if (correctAnswers.includes(answer)) {
                 message.innerHTML = `<span class="correct">Richtig!</span><br>Drehe den QR-Code um und lege ihn auf Feld 3.`;
             } else {
                 message.innerHTML = `<span class="wrong">Leider falsch, versuch es noch einmal.</span>`;
             }
-        }
-        function showTip(id) {
-            document.getElementById(id).style.display = "block";
         }
     </script>
 </head>
@@ -97,13 +81,11 @@
 
     <p class="quote">"Ich hab ein Glas voll Dreck und rat mal, was da drin ist."</p>
 
+    <!-- Eingabefeld und Button -->
+    <div>
         <input type="text" id="answer" placeholder="Filmtitel eingeben">
         <button class="answer" onclick="checkAnswer()">Antwort prüfen</button>
+    </div>
     <p id="message"></p>
-    
-    <div>
-        <button onclick="showTip()">Tipp</button>
-        <p id="tip" class="tip">Ein Piratenabenteuer mit einem exzentrischen Kapitän, der mehr Glück als Verstand hat.</p>
-    <div>
 </body>
 </html>
